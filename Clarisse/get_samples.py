@@ -53,27 +53,35 @@ def print_data(ctx="project*light*shot**",
     Returns:
 
     """
+
     all_lights = get_objects(ctx, obj_typ)
 
     for light in all_lights:
+
         light_name = light.get_name()
-        samples_str = str()
+        attr_val = str()
+
         for attrib in attrib_list:
+
             if light.attribute_exists(attrib):
+
                 value = light.get_attribute(attrib).get_long()
-                samples_str = "{} | {}".format(samples_str,
-                                               (":".join([attrib, str(value)])))
-        print("{} {} ----------------------- ({})".format(light_name,
-                                                          samples_str,
-                                                          str(light)))
+
+                if value == -1:
+                    # Ignore materials without any samples
+                    return
+
+                attr_val = f"{attr_val} | {attrib}:{value}"
+
+        print(f"{light_name} {attr_val} ----------------------- ({light})")
 
 
 # Light Data
-print(("-"*100))
+print("-"*100)
 print("Lights Data:")
 print_data(ctx="project*", obj_typ="Light")
 
 # Material Data
-print(("-"*100))
+print("-"*100)
 print("Materials Data:")
 print_data(ctx="project*", obj_typ="Material")
