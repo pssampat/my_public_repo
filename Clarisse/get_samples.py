@@ -1,6 +1,10 @@
 """
 Prints the list of samples value in the entire scene
 
+NOTE---------------------------------------
+- - - - - - ONLY WORKS WITH CLARISSE 5
+-------------------------------------------
+
 Output Example:
 ----------------------------------------------------------------------------------------------------
 Lights Data:
@@ -24,6 +28,8 @@ ATTR_LIST = [
 
 def get_objects(filter_rule="**", obj_type="*"):
     """
+    FOR CLARISSE 5.0+
+
     Get the list of all the objects of specified type
     Args:
         filter_rule (str): OPTIONAL - Context Path where to query the search
